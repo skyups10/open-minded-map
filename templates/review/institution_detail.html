@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-3">
+    <!-- 질문 -->
+    <h2 class="border-bottom py-2">{{ institution.subject }}</h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ institution.content }}</div>
+            <div class="d-flex justify-content-end">
+                <div class="badge bg-light text-dark p-2">
+                    {{ institution.create_date }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 답변 -->
+    <h5 class="border-bottom my-3 py-2">{{institution.review_set.count}}개의 후기가 있습니다.</h5>
+    {% for review in institution.review_set.all %}
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ review.content }}</div>
+            <div class="d-flex justify-content-end">
+                <div class="badge bg-light text-dark p-2">
+                    {{ review.create_date }}
+                </div>
+            </div>
+            <div class="my-3">
+                {% if request.user == review.author %}
+                <a href="{% url 'review:review_modify' review.id  %}" 
+                   class="btn btn-sm btn-outline-secondary">수정</a>
+                <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary "
+                    data-uri="{% url 'review:review_delete' review.id  %}">삭제</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- 답변 등록 -->
+    <form action="{% url 'review:review_create' institution.id %}" method="post" class="my-3">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="content" class="form-label">후기 내용</label>
+            <textarea {% if not user.is_authenticated %}disabled{% endif %}
+                name="content" id="content" class="form-control" rows="10"></textarea>
+        </div>
+        <input type="submit" value="후기등록" class="btn btn-primary">
+    </form>
+</div>
+{% endblock %}
+{% block script %}
+<script type='text/javascript'>
+    const delete_elements = document.getElementsByClassName("delete");
+    Array.from(delete_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+</script>
+{% endblock %}
