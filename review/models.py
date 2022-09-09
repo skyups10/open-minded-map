@@ -16,3 +16,4 @@ class Review(models.Model):
     institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
     content = models.TextField()
     create_date = models.DateTimeField()
+    age = models.IntegerField()

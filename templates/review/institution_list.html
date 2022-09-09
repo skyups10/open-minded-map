@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="d-flex justify-content-end">
+    <div class="badge bg-light text-dark p-2">
+        찾는 기관이 없을 경우, skyups10@naver.com으로 문의 바랍니다.
+    </div>
+</div>
 <div class="container my-3">
     <table class="table">
         <thead>
@@ -25,7 +30,7 @@
         {% endfor %}
         {% else %}
         <tr>
-            <td colspan="3">질문이 없습니다.</td>
+            <td colspan="3">기관이 없습니다.</td>
         </tr>
         {% endif %}
         </tbody>

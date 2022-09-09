@@ -27,23 +27,26 @@
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:rgb(248, 181, 0);">지도</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">    
-                                <li><a class="dropdown-item" href="#">서울</a></li>
+                                <li><a class="dropdown-item" href="{% url 'map:seoul' %}">서울</a></li>
                                 <li><a class="dropdown-item" href="#">경기</a></li>
                                 <li><a class="dropdown-item" href="#">부산</a></li>
                           </ul>
                     </div>
                 </li>
+                {% if user.is_authenticated %}
                 <li class="nav-item dropdown">                
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:rgb(248, 181, 0);">기관 후기</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-                                {% if user.is_authenticated %}
                                 <li><a class="dropdown-item" href="{% url 'review:index' %}">서울</a></li>
                                 <li><a class="dropdown-item" href="#">경기</a></li>
                                 <li><a class="dropdown-item" href="#">부산</a></li>
-                                {% endif %}
                           </ul>
                     </div>
+                </li>
+                {% endif %}
+                <li>
+                    <a class="nav-link" href="#" style="color:rgb(248, 181, 0);">뉴스</a>
                 </li>
             </ul>
         </div>

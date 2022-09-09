@@ -14,7 +14,8 @@ class InstitutionForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['content']
+        fields = ['content', 'age']
         labels = {
             'content': '답변내용',
+            'age' : '연령대',
         }

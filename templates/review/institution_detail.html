@@ -8,27 +8,28 @@
             <div class="card-text" style="white-space: pre-line;">{{ institution.content }}</div>
             <div class="d-flex justify-content-end">
                 <div class="badge bg-light text-dark p-2">
-                    {{ institution.create_date }}
+                    <!-- 작성 일자 : {{ institution.create_date }} -->
                 </div>
             </div>
         </div>
     </div>
     <!-- 답변 -->
-    <h5 class="border-bottom my-3 py-2">{{institution.review_set.count}}개의 후기가 있습니다.</h5>
+    <h5 class="border-bottom my-3 py-2"><i class="fas fa-heart"></i> {{institution.review_set.count}}개의 후기가 있습니다.</h5>
     {% for review in institution.review_set.all %}
     <div class="card my-3">
         <div class="card-body">
-            <div class="card-text" style="white-space: pre-line;">{{ review.content }}</div>
+            <div class="card-text" style="white-space: pre-line;"><span class="badge bg-secondary">{{ review.age }}대</span> {{ review.content }} 
+                </div>
             <div class="d-flex justify-content-end">
                 <div class="badge bg-light text-dark p-2">
-                    {{ review.create_date }}
+                    작성 일자 : {{ review.create_date }}
                 </div>
             </div>
-            <div class="my-3">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 {% if request.user == review.author %}
                 <a href="{% url 'review:review_modify' review.id  %}" 
-                   class="btn btn-sm btn-outline-secondary">수정</a>
-                <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary "
+                   class="btn btn-sm btn-light">수정</a>
+                <a href="javascript:void(0)" class="delete btn btn-sm btn-light"
                     data-uri="{% url 'review:review_delete' review.id  %}">삭제</a>
                 {% endif %}
             </div>
@@ -36,14 +37,19 @@
     </div>
     {% endfor %}
     <!-- 답변 등록 -->
+    <h5 class="border-bottom my-3 py-2"><i class="fas fa-heart"></i> 후기 등록하기</h5>
     <form action="{% url 'review:review_create' institution.id %}" method="post" class="my-3">
         {% csrf_token %}
         <div class="mb-3">
+            <label for="age" class="form-label">연령대</label>
+            <p><input type="text" class="form-label" name="age" id="age" min="2" max="10" placeholder="ex) 20" style="border-radius: 10px; border: 1px solid lightgrey; height: 60px; padding: 10px; text-align: center;"></p>
             <label for="content" class="form-label">후기 내용</label>
             <textarea {% if not user.is_authenticated %}disabled{% endif %}
-                name="content" id="content" class="form-control" rows="10"></textarea>
+                name="content" id="content" class="form-control" rows="5"></textarea>
         </div>
-        <input type="submit" value="후기등록" class="btn btn-primary">
+        <div class="d-grid gap-2">
+            <input type="submit" value="후기등록" class="btn btn-secondary">
+        </div>
     </form>
 </div>
 {% endblock %}
