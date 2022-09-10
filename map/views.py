@@ -5,3 +5,6 @@ def index(request):
 
 def seoul(request):
     return render(request, 'map/seoul.html')
+
+def teenager(request):
+    return render(request, 'map/teenager.html')

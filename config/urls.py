@@ -24,6 +24,7 @@ urlpatterns = [
     path('review/', include('review.urls')),
     path('common/', include('common.urls')),
     path('map/', include('map.urls')),
+    path('news/', include('news.urls')),
     path('', views.index, name='index'), 
 ]
 

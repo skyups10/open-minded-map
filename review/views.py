@@ -4,10 +4,21 @@ from django.utils import timezone
 from .models import Institution, Review
 from .forms import ReviewForm
 from django.contrib import messages
+from django.core.paginator import Paginator
+from django.db.models import Q
 
 def index(request):
+    page = request.GET.get('page', '1')
+    kw = request.GET.get('kw', '')  # 검색어
     institution_list = Institution.objects.order_by('-create_date')
-    context = {'institution_list': institution_list}
+    if kw:
+        institution_list = institution_list.filter(
+            Q(subject__icontains=kw) |  # 제목 검색
+            Q(content__icontains=kw)  # 내용 검색
+        ).distinct()
+    paginator = Paginator(institution_list, 8)
+    page_obj = paginator.get_page(page)
+    context = {'institution_list': page_obj, 'page': page, 'kw': kw}
     return render(request, 'review/institution_list.html', context)
 
 def detail(request, institution_id):

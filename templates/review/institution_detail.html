@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load review_filter %}
 {% block content %}
 <div class="row">
     <div class="col-md-7 my-3">
         <h2 class="mx-3 border-bottom py-2">{{ institution.subject }}</h2>
         <div class="mx-3 card my-3">
             <div class="card-body" style="background-color: #F8F9FA">
-                <div class="card-text" style="white-space: pre-line;">{{ institution.content }}</div>
+                <div class="card-text" style="white-space: pre-line;">{{ institution.content|mark }}</div>
                 <div class="d-flex justify-content-end">
                     <div class="badge bg-light text-dark p-2">
                         <!-- 작성 일자 : {{ institution.create_date }} -->
@@ -22,17 +23,17 @@
             <div class="card-body">
                 <div class="card-text">
                     {% if 10 == review.age %}
-                    <span class="badge bg-primary">{{ review.age }}대</span> {{ review.content }}
+                    <span class="badge bg-primary">{{ review.age }}대</span> {{ review.content|mark }}
                     {% elif 20 == review.age %}
-                    <span class="badge bg-success">{{ review.age }}대</span> {{ review.content }}
+                    <span class="badge bg-success">{{ review.age }}대</span> {{ review.content|mark }}
                     {% elif 30 == review.age %}
-                    <span class="badge bg-warning text-dark">{{ review.age }}대</span> {{ review.content }}
+                    <span class="badge bg-warning text-dark">{{ review.age }}대</span> {{ review.content|mark }}
                     {% elif 40 == review.age %}
-                    <span class="badge bg-info text-dark">{{ review.age }}대</span> {{ review.content }}
+                    <span class="badge bg-info text-dark">{{ review.age }}대</span> {{ review.content|mark }}
                     {% elif 50 == review.age %}
-                    <span class="badge bg-light text-dark">{{ review.age }}대</span> {{ review.content }}
+                    <span class="badge bg-light text-dark">{{ review.age }}대</span> {{ review.content|mark }}
                     {% else %}
-                    <span class="badge bg-secondary">{{ review.age }}대</span> {{ review.content }}
+                    <span class="badge bg-secondary">{{ review.age }}대</span> {{ review.content|mark }}
                     {% endif %}
                 </div>
                 <div class="d-flex justify-content-end">

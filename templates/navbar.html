@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light border-bottom" style="background-color:rgb(48, 49, 73);">
     <div class="container-fluid navbar navbar-expand-lg">
-        <a class="navbar-brand" href="/" style="color:white;"><i class="fas fa-street-view" style="color:rgb(248, 181, 0);"></i> 마음열지도</a>
+        <a class="navbar-brand" href="/" style="color:white;"><i class="fas fa-street-view" style="color:rgb(248, 181, 0);"></i> <b>마음열지도</b></a>
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
@@ -27,8 +27,9 @@
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:rgb(248, 181, 0);">지도</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">    
-                                <li><a class="dropdown-item" href="{% url 'map:seoul' %}">서울특별시</a></li>
-                                <li><a class="dropdown-item" href="#">청소년</a></li>
+                                <li><a class="dropdown-item" href="{% url 'map:seoul' %}">서울시</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'map:teenager' %}">청소년</a></li>
                           </ul>
                     </div>
                 </li>
@@ -38,7 +39,7 @@
                 </li>
                 {% endif %}
                 <li>
-                    <a class="nav-link" href="#" style="color:rgb(248, 181, 0);">뉴스</a>
+                    <a class="nav-link" href="{% url 'news:index' %}" style="color:rgb(248, 181, 0);">뉴스</a>
                 </li>
             </ul>
         </div>
