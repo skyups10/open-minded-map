@@ -6,7 +6,10 @@
         <h2 class="mx-3 border-bottom py-2">{{ institution.subject }}</h2>
         <div class="mx-3 card my-3">
             <div class="card-body" style="background-color: #F8F9FA">
-                <div class="card-text" style="white-space: pre-line;">{{ institution.content|mark }}</div>
+                <div class="card-text" style="white-space: pre-line;">
+                    {{ institution.content|mark }}
+                    {{ institution.text|mark }}
+                </div>
                 <div class="d-flex justify-content-end">
                     <div class="badge bg-light text-dark p-2">
                         <!-- 작성 일자 : {{ institution.create_date }} -->

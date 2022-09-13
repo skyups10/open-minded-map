@@ -4,10 +4,11 @@ from review.models import Institution, Review
 class InstitutionForm(forms.ModelForm):
     class Meta:
         model = Institution 
-        fields = ['subject', 'content'] 
+        fields = ['subject', 'content', 'text'] 
         labels = {
             'subject': '제목',
             'content': '내용',
+            'text': '설명',
         }
 
 
